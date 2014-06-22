@@ -18,7 +18,7 @@ views.ComplimentView.register(app)
 
 @app.route('/')
 def index():
-    return render_template('index.html', compliments=models.Compliment.query.all())
+    return render_template('index.html', compliments=models.Compliment.query.order_by(models.Compliment.lang, models.Compliment.sex, models.Compliment.text).all())
 
 
 if __name__ == '__main__':
