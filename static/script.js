@@ -86,7 +86,7 @@ function createCompliment(){
 
     performRequest('POST', '/compliment', 'lang=' + input_lang.value + '&sex=' + input_sex.value + '&text=' + input_text.value, function(response){
         var table = document.getElementById('compliments_table');
-        var row = table.insertRow(-1);
+        var row = table.insertRow(1);
         row.id = response['id'];
         row.insertCell(-1).innerHTML = response['lang'];
         row.insertCell(-1).innerHTML = response['sex'];
