@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 
-import bouquet
+from app import app as application
+from app import db
+from config import TestConfig
 from unittest import TestCase
 import unittest
 
@@ -9,9 +11,13 @@ import unittest
 class BouquetTestCase(TestCase):
 
     def setUp(self):
-        app = bouquet.app
-        app.config['DATABASE_PATH'] = 'sqlite:///:memory:'
-        self.app = app.test_client()
+        application.config.from_object(TestConfig)
+        db.create_all()
+        self.app = application.test_client()
+
+    def tearDown(self):
+        db.drop_all()
+        db.create_all()
 
     def test_post_compliment(self):
         resp = self.app.post('/compliment', data={'sex': 'male', 'lang': 'ru', 'text': 'Ты самый лучший!'})
