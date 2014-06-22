@@ -1,10 +1,11 @@
 from flask import Flask
+from flask import render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 import config
 
 
 app = Flask(__name__)
-app.config.from_object(config.Config)
+app.config.from_object(config.DebugConfig)
 db = SQLAlchemy(app)
 
 
@@ -13,6 +14,11 @@ import views
 
 
 views.ComplimentView.register(app)
+
+
+@app.route('/')
+def index():
+    return render_template('index.html', compliments=models.Compliment.query.all())
 
 
 if __name__ == '__main__':

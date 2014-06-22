@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Bouquet</title>
+		<script type="text/javascript" src="{{ url_for('static', filename = 'script.js') }}"></script>
+    </head>
+    <body>
+        <table id="compliments_table" style="margin:auto">
+            <tr>
+                <td><input id="input_lang" type="text" placeholder="lang" style="width:25px; font-size:12px"></td>
+                <td><input id="input_sex" type="text" placeholder="sex" style="width:50px; font-size:12px"></td>
+                <td><input id="input_text" type="text" placeholder="text" style="width:500px; font-size:12px"></td>
+                <td colspan="2"><input id="input_submit" type="submit" value="Create"></td>
+            </tr>
+            {% for c in compliments %}
+                <tr>
+                    <td>{{ c.lang }}</td>
+                    <td>{{ c.sex }}</td>
+                    <td>{{ c.text }}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
