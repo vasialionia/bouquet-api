@@ -2,13 +2,16 @@
 
 
 import bouquet
+from unittest import TestCase
 import unittest
 
 
-class BouquetTestCase(unittest.TestCase):
+class BouquetTestCase(TestCase):
 
     def setUp(self):
-        self.app = bouquet.app.test_client()
+        app = bouquet.app
+        app.config['DATABASE_PATH'] = 'sqlite:///:memory:'
+        self.app = app.test_client()
 
     def test_post_compliment(self):
         resp = self.app.post('/compliment', data={'sex': 'male', 'lang': 'ru', 'text': 'Ты самый лучший!'})
@@ -21,6 +24,10 @@ class BouquetTestCase(unittest.TestCase):
         resp = self.app.get('/compliment')
         assert 'Ты самый лучший!' in resp.data
         assert 'Ты самая лучшая!' in resp.data
+
+        resp = self.app.get('/compliment/1')
+        assert 'Ты самый лучший!' in resp.data
+        assert 'Ты самая лучшая!' not in resp.data
 
     def test_delete_compliment(self):
         self.app.post('/compliment', data={'sex': 'male', 'lang': 'ru', 'text': 'Ты самый лучший!'})
