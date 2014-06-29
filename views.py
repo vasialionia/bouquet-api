@@ -10,21 +10,21 @@ class ComplimentView(MethodView):
 
     def get(self, compliment_id=None):
         if not compliment_id:
-            return Response(json.dumps([c.to_json() for c in models.Compliment.query.all()], ensure_ascii=False), 200)
+            return Response(json.dumps([c.to_json() for c in models.Compliment.query.all()], ensure_ascii=False), status=200, mimetype='application/json')
         else:
-            return Response(json.dumps(models.Compliment.query.get(compliment_id).to_json(), ensure_ascii=False), 200)
+            return Response(json.dumps(models.Compliment.query.get(compliment_id).to_json(), ensure_ascii=False), status=200, mimetype='application/json')
 
     def post(self):
         c = models.Compliment(lang=request.form.get('lang'), sex=request.form.get('sex'), text=request.form.get('text'))
         db.session.add(c)
         db.session.commit()
-        return Response(json.dumps(c.to_json(), ensure_ascii=False), 200)
+        return Response(json.dumps(c.to_json(), ensure_ascii=False), status=200, mimetype='application/json')
 
     def delete(self, compliment_id):
         c = models.Compliment.query.get(compliment_id)
         db.session.delete(c)
         db.session.commit()
-        return Response(None, 200)
+        return Response(None, status=200, mimetype='application/json')
 
     def put(self, compliment_id):
         c = models.Compliment.query.get(compliment_id)
@@ -32,7 +32,7 @@ class ComplimentView(MethodView):
         c.sex = request.form.get('sex')
         c.text = request.form.get('text')
         db.session.commit()
-        return Response(json.dumps(c.to_json(), ensure_ascii=False), 200)
+        return Response(json.dumps(c.to_json(), ensure_ascii=False), status=200, mimetype='application/json')
 
     @classmethod
     def register(cls, app):
