@@ -7,6 +7,13 @@
     <body>
         <table id="compliments_table" style="margin:auto">
             <tr>
+                <td colspan="5">
+                    <form style="text-align: right" method="post" action="{{ url_for('logout') }}">
+                        <input type="submit" value="logout">
+                    </form>
+                </td>
+            </tr>
+            <tr>
                 <td><input id="input_lang" type="text" placeholder="lang" style="width:25px; font-size:12px"></td>
                 <td><input id="input_sex" type="text" placeholder="sex" style="width:50px; font-size:12px"></td>
                 <td><input id="input_text" type="text" placeholder="text" style="width:100%; font-size:12px"></td>
