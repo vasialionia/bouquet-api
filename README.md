@@ -1,10 +1,16 @@
-Bouquet
-=======
+# Bouquet
 
-A simple application for storing compliments.
+A simple app that makes you compliments.
 
-API
----
+**App Store** https://itunes.apple.com/app/surprise-bouquet/id895786674
+
+**iOS source code** https://github.com/vasialionia/bouquet-ios
+
+**Backend source code** https://github.com/vasialionia/bouquet-api
+
+**Graphical design** https://github.com/vasialionia/bouquet-design
+
+# API
 
 #### GET /compliment
 Returns an array of all the compliments stored. (See GET /compliment/:id response format.)
